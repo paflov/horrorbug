@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<iframe srcdoc='<!DOCTYPE html><html><body>inner<script>setTimeout(() => {window.parent.postMessage({type: `OK`}, `*`);}, 1500);const x = new class { y = new class {} } </script></body></html>' sandbox="allow-forms allow-scripts allow-same-origin"></iframe>
+<br>
+<span id="user-agent"></span> --> <span id='output'>not ok</span>
+<script>
+  window.addEventListener('message', (event) => {
+    console.log({event});
+    document.getElementById('output').innerText = event.data.type;
+  });
+  document.getElementById('user-agent').innerText = navigator.userAgent;
+</script>
+</body>
+</html>
